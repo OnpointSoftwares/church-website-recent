@@ -1,0 +1,185 @@
+/* Ushering Ministry Page Styles - matches Sound & Media Ministry visual theme */
+:root {
+    --primary-purple: #4c1d95;
+    --secondary-purple: #6b21a8;
+    --light-purple: #f3e8ff;
+    --accent-purple: #8b5cf6;
+    --accent-gold: #f59e0b;
+    --dark-purple: #312e81;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --white: #ffffff;
+    --off-white: #f9fafb;
+    --gradient-primary: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-purple) 100%);
+    --shadow-lg: 0 8px 32px rgba(76, 29, 149, 0.15);
+    --shadow-xl: 0 16px 48px rgba(76, 29, 149, 0.20);
+}
+
+
+.ministry-hero {
+    background: var(--gradient-primary);
+    position: relative;
+    padding: 6rem 0;
+    color: var(--white);
+    text-align: center;
+    overflow: hidden;
+    border-radius: 0 0 50px 50px;
+    margin-bottom: 4rem;
+}
+
+.ministry-hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 50, 0.6);
+    z-index: 1;
+}
+
+.ministry-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.ministry-hero h1, .ministry-hero .display-4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.ministry-hero .lead {
+    font-size: 1.5rem;
+    color: #f3f3f3;
+    margin-bottom: 1rem;
+}
+
+.enhanced-card, .guideline-card, .ministry-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.enhanced-card::before, .guideline-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+}
+
+.enhanced-card:hover, .guideline-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.enhanced-card:hover::before, .guideline-card:hover::before {
+    left: 100%;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.card-icon {
+    background: var(--gradient-primary);
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-purple);
+    margin: 0;
+}
+
+.guidelines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.principles-list, .criteria-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+.principles-list li, .criteria-list li {
+    background: var(--light-purple);
+    padding: 1.2rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.07);
+    font-size: 1.08rem;
+    color: var(--primary-purple);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 220px;
+}
+
+@media (max-width: 768px) {
+    .ministry-hero {
+        padding: 3rem 0;
+        border-radius: 0 0 24px 24px;
+    }
+    .enhanced-card, .guideline-card, .ministry-content {
+        padding: 1.2rem;
+    }
+    .guidelines-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .card-title {
+        font-size: 1.3rem;
+    }
+    .card-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

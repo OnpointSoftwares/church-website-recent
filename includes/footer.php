@@ -1,0 +1,58 @@
+<!-- footer.php: Reusable site footer for CEFC -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Christ Ekklesia Fellowship Chapel</h5>
+                <p>Where Christ takes the preeminence of our worship. Join us in celebrating the supremacy of Jesus Christ in all things.</p>
+            </div>
+            <div class="col-lg-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/cefc/index.html">Home</a></li>
+                    <li><a href="/cefc/index.html#about">About</a></li>
+                    <li><a href="/cefc/index.html#services">Services</a></li>
+                    <li><a href="/cefc/index.html#ministries">Ministries</a></li>
+                    <li><a href="/cefc/index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5>Follow Us</h5>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p>&copy; 2025 Christ Ekklesia Fellowship Chapel. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            // Only smooth scroll if anchor is on this page
+            const targetId = this.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

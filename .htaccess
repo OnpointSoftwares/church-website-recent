@@ -1,38 +1,21 @@
-# .htaccess for clean URLs (hide .html and /templates/ in URLs)
-# Place this file in your web root directory
-
 RewriteEngine On
 RewriteBase /
 
-# Serve files and directories if they exist
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
+RewriteRule ^ index.php [QSA,L]
 
-# Rewrite clean URLs to templates directory
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([a-zA-Z0-9/_-]+)$ templates/$1.html [L]
-
-# Redirect /templates/xxx.html to /xxx
 RewriteCond %{THE_REQUEST} /templates/([^.]+)\.html [NC]
 RewriteRule ^ templates/%1 [R=301,L]
-
-
-# Force www (optional, uncomment if needed)
-# RewriteCond %{HTTP_HOST} !^www\.
-# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
-
-# Force HTTPS (optional, uncomment if needed)
-# RewriteCond %{HTTPS} off
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Custom 404 page (optional)
-# ErrorDocument 404 /404.html
-
-# php -- BEGIN cPanel-generated handler, do not edit
-# Set the “ea-php81” package as the default “PHP” programming language.
 <IfModule mime_module>
   AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
 </IfModule>
-# php -- END cPanel-generated handler, do not edit

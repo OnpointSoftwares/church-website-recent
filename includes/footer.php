@@ -9,11 +9,11 @@
             <div class="col-lg-4">
                 <h5>Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="/cefc/index.html">Home</a></li>
-                    <li><a href="/cefc/index.html#about">About</a></li>
-                    <li><a href="/cefc/index.html#services">Services</a></li>
-                    <li><a href="/cefc/index.html#ministries">Ministries</a></li>
-                    <li><a href="/cefc/index.html#contact">Contact</a></li>
+                    <li><a href="/index">Home</a></li>
+                    <li><a href="/index#about">About</a></li>
+                    <li><a href="/index#services">Services</a></li>
+                    <li><a href="/index#ministries">Ministries</a></li>
+                    <li><a href="/index#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="col-lg-4">

@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="../style.css?v=20250727" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -49,7 +50,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index#contact">Contact</a>
+                        <a class="nav-link" href="/index#contact">Contact</a>
                     </li>
                     <li class="nav-item d-none d-lg-block ms-2">
                         <a class="btn btn-outline-light px-4" href="/volunteers.php">
@@ -63,6 +64,11 @@
                     <li class="nav-item d-lg-none">
                         <a class="nav-link" href="volunteers.php">
                             <i class="fas fa-hands-helping me-1"></i> Volunteer now
+                        </a>
+                    </li>
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link" href="giving.php">
+                            <i class="fas fa-hands-helping me-1"></i> Give now
                         </a>
                     </li>
                 </ul>

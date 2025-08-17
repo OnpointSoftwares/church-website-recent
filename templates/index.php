@@ -730,21 +730,76 @@ include dirname(__DIR__) . '/includes/header.php';
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Send Us a Message</h5>
-                            <form>
+                            <form id="contactForm" method="POST" action="/includes/contact_handler.php">
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Subject">
+                                    <input type="text" name="subject" class="form-control" placeholder="Subject">
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+                                <div id="formMessages" class="mt-3"></div>
                             </form>
+                            <script>
+                            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                
+                                const form = e.target;
+                                const formData = new FormData(form);
+                                const submitBtn = document.getElementById('submitBtn');
+                                const messagesDiv = document.getElementById('formMessages');
+                                
+                                // Disable submit button
+                                submitBtn.disabled = true;
+                                submitBtn.innerHTML = 'Sending...';
+                                messagesDiv.innerHTML = '';
+                                
+                                // Submit form via AJAX
+                                fetch(form.action, {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.status === 'success') {
+                                        // Show success message
+                                        messagesDiv.className = 'alert alert-success';
+                                        messagesDiv.innerHTML = data.message;
+                                        form.reset();
+                                    } else {
+                                        // Show error message(s)
+                                        messagesDiv.className = 'alert alert-danger';
+                                        let errorHtml = data.message;
+                                        if (data.errors) {
+                                            errorHtml += '<ul class="mb-0">';
+                                            data.errors.forEach(error => {
+                                                errorHtml += `<li>${error}</li>`;
+                                            });
+                                            errorHtml += '</ul>';
+                                        }
+                                        messagesDiv.innerHTML = errorHtml;
+                                    }
+                                })
+                                .catch(error => {
+                                    /*messagesDiv.className = 'alert alert-danger';
+                                    messagesDiv.textContent = 'An error occurred. Please try again.';
+                                    console.error('Error:', error);*/
+                                })
+                                .finally(() => {
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = 'Send Message';
+                                    
+                                    // Scroll to messages
+                                    messagesDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                });
+                            });
+                            </script>
                         </div>
                     </div>
                 </div>

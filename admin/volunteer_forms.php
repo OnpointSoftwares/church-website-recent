@@ -45,47 +45,64 @@ $totalFiles = count($files);
             --transition: all 0.4s ease;
         }
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            background: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
             color: var(--text-dark);
         }
         .sidebar {
             position: fixed;
-            left: 0; top: 0; bottom: 0;
+            left: 0;
+            top: 0;
+            height: 100vh;
             width: 280px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
-            color: var(--white);
+            background: linear-gradient(180deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
             box-shadow: var(--box-shadow);
             z-index: 1000;
-            padding: 1.5rem 1rem 1rem 1rem;
-            border-radius: 0 32px 32px 0;
+            transform: translateX(-100%);
+            transition: var(--transition);
         }
+        .sidebar.active { transform: translateX(0); }
         .sidebar-header {
             text-align: center;
             margin-bottom: 2rem;
         }
         .sidebar-header i {
             font-size: 2.2rem;
-            margin-bottom: 0.5rem;
         }
+        .sidebar-menu { padding: 1rem 0; }
         .sidebar-menu .nav-link {
-            color: var(--white);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 1rem 1.5rem;
             transition: var(--transition);
+            border: none;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
         }
-        .sidebar-menu .nav-link.active, .sidebar-menu .nav-link:hover {
-            background: var(--light-purple);
-            color: var(--primary-purple);
+        .sidebar-menu .nav-link:hover,
+        .sidebar-menu .nav-link.active {
+            color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: var(--accent-gold);
+            backdrop-filter: blur(10px);
         }
+        .sidebar-menu .nav-link i { width: 20px; margin-right: 12px; font-size: 1.1rem; }
         .main-content {
             margin-left: 280px;
             padding: 2.5rem 2rem 2rem 2rem;
         }
         .navbar {
-            border-radius: 0 0 16px 16px;
-            margin-bottom: 0;
+            background: var(--white) !important;
+            box-shadow: var(--box-shadow);
+            border-bottom: 1px solid rgba(96, 55, 158, 0.1);
+            padding: 1rem 2rem;
         }
         /* Page banner to match site vibrancy */
         .page-banner {
@@ -96,19 +113,37 @@ $totalFiles = count($files);
         }
         .page-banner .lead { opacity: 0.9; }
         .content-area {
-            background: var(--white);
+            padding: 2rem;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        .card {
+            border: none;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 2rem 2rem 1.5rem 2rem;
+            transition: var(--transition);
+            overflow: hidden;
         }
-        .table {
-            background: var(--white);
-        }
-        .table tbody tr:hover { background-color: #faf5ff; }
-        .badge { border-radius: 10px; }
-        .btn-outline-primary { border-width: 2px; }
-        .card-header i { opacity: 0.95; }
-        .card { border-radius: 18px; }
+        .card:hover { box-shadow: 0 8px 35px rgba(76, 29, 149, 0.15); transform: translateY(-2px); }
+        .card-header { background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple)); color: var(--white); border: none; padding: 1.5rem; }
+        .card-header h5 { margin: 0; color: var(--white); display: flex; align-items: center; }
+        .card-header i { margin-right: 0.5rem; color: var(--accent-gold); }
+        .form-control { border: 2px solid rgba(96, 55, 158, 0.1); border-radius: 12px; padding: 0.8rem 1rem; transition: var(--transition); }
+        .form-control:focus { border-color: var(--accent-purple); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple)); border: none; border-radius: 12px; padding: 0.8rem 1.5rem; font-weight: 600; transition: var(--transition); }
+        .btn-primary:hover { background: linear-gradient(135deg, var(--accent-purple), var(--primary-purple)); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(96, 55, 158, 0.3); }
+        .table { border-radius: 12px; overflow: hidden; }
+        .table th { background: var(--light-purple); border: none; font-weight: 600; color: var(--text-dark); padding: 1rem; }
+        .table td { border-color: rgba(96, 55, 158, 0.1); padding: 1rem; vertical-align: middle; }
+        .badge { padding: 0.5rem 1rem; border-radius: 25px; font-weight: 500; }
+        .alert { border: none; border-radius: 12px; padding: 1rem 1.5rem; }
+        .alert-success { background: linear-gradient(135deg, #10b981, #059669); color: var(--white); }
+        .btn-outline-primary { color: var(--primary-purple); border: 2px solid var(--primary-purple); border-radius: 8px; }
+        .btn-outline-primary:hover { background: var(--primary-purple); border-color: var(--primary-purple); }
+        .btn-outline-danger { color: #ef4444; border: 2px solid #ef4444; border-radius: 8px; }
+        .btn-outline-danger:hover { background: #ef4444; border-color: #ef4444; }
+        .modal-content { border: none; border-radius: var(--border-radius); box-shadow: 0 20px 60px rgba(76, 29, 149, 0.2); }
+        .modal-header { background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple)); color: var(--white); border: none; border-radius: var(--border-radius) var(--border-radius) 0 0; }
         /* Sticky table header and purple accent striping */
         thead.sticky-header th {
             position: sticky;
@@ -119,9 +154,20 @@ $totalFiles = count($files);
         }
         .table.table-striped tbody tr:nth-of-type(odd) { background-color: #fbf7ff; }
         .table thead th { color: var(--primary-purple); font-weight: 600; }
-        @media (max-width: 991px) {
-            .sidebar { display: none; }
-            .main-content { margin-left: 0; padding: 1rem; }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+            .main-content { margin-left: 0; min-height: 100vh; transition: var(--transition); }
+            .main-content.sidebar-open { margin-left: 280px; }
+            .content-area { padding: 1rem; }
+            .table-responsive { border-radius: 12px; }
+        }
+        @media (min-width: 992px) {
+            .sidebar { transform: translateX(0); }
+            .main-content { margin-left: 280px; }
+            .navbar .btn[data-bs-toggle="offcanvas"] { display: none; }
         }
     </style>
 </head>
@@ -134,15 +180,38 @@ $totalFiles = count($files);
             <small class="text-white-50">Management System</small>
         </div>
         <nav class="sidebar-menu">
-            <a href="index.php" class="nav-link"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
-            <a href="#" class="nav-link"><i class="fas fa-microphone"></i> <span>Sermons</span></a>
-            <a href="#" class="nav-link"><i class="fas fa-users"></i> <span>Members</span></a>
-            <a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Events</span></a>
-            <a href="#" class="nav-link"><i class="fas fa-hand-holding-heart"></i> <span>Donations</span></a>
-            <a href="#" class="nav-link"><i class="fas fa-chart-bar"></i> <span>Reports</span></a>
-            <a href="volunteer_forms.php" class="nav-link active"><i class="fas fa-file-pdf"></i> <span>Volunteer Forms</span></a>
-            <a href="#" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a>
-            <a href="?action=logout" class="nav-link text-warning" onclick="return confirm('Are you sure you want to logout?')"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-microphone"></i>
+                <span>Sermons</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Members</span>
+            </a>
+            <a href="events_admin.php" class="nav-link<?php if (basename($_SERVER['PHP_SELF']) === 'events_admin.php') echo ' active'; ?>">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Events</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-hand-holding-heart"></i>
+                <span>Donations</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-chart-bar"></i>
+                <span>Reports</span>
+            </a>
+            <a href="volunteer_forms.php" class="nav-link active">
+                <i class="fas fa-file-pdf"></i>
+                <span>Volunteer Forms</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="?action=logout" class="nav-link text-warning" onclick="return confirm('Are you sure you want to logout?')">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
         </nav>
     </div>
     <!-- Main Content -->

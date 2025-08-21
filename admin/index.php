@@ -100,6 +100,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../style.css">
         <style>
             :root {
                 --primary-purple: #60379e;
@@ -122,8 +123,9 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 min-height: 100vh;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 font-family: 'Inter', sans-serif;
-                overflow: hidden;
+                overflow-y: auto;
                 position: relative;
             }
             
@@ -159,7 +161,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
             
             .login-header {
                 background: var(--primary-purple);
-                padding: 3rem 2rem 2rem;
+                padding: 2.25rem 2rem 1.5rem;
                 text-align: center;
                 position: relative;
                 overflow: hidden;
@@ -182,10 +184,12 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 50% { transform: translateX(100%) rotate(45deg); }
             }
             
-            .login-header .icon {
-                font-size: 3.5rem;
-                color: var(--accent-gold);
-                margin-bottom: 1rem;
+            .login-header .brand-logo {
+                height: 56px;
+                width: auto;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+                margin-bottom: 0.75rem;
                 position: relative;
                 z-index: 2;
             }
@@ -207,14 +211,9 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 z-index: 2;
             }
             
-            .login-form {
-                padding: 2.5rem;
-            }
+            .login-form { padding: 2rem; }
             
-            .form-floating {
-                position: relative;
-                margin-bottom: 1.5rem;
-            }
+            .form-floating { position: relative; margin-bottom: 1.25rem; }
             
             .form-control {
                 border: 2px solid rgba(96, 55, 158, 0.1);
@@ -239,6 +238,16 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 color: var(--text-light);
                 z-index: 5;
                 transition: var(--transition);
+            }
+            .toggle-password {
+                position: absolute;
+                right: 0.75rem;
+                top: 50%;
+                transform: translateY(-50%);
+                background: transparent;
+                border: none;
+                color: var(--text-light);
+                z-index: 5;
             }
             
             .form-control:focus + .input-icon {
@@ -275,29 +284,26 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 color: white;
             }
             
+            .login-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+            .login-meta a { color: var(--accent-purple); text-decoration: none; }
+            .login-meta a:hover { text-decoration: underline; }
             @media (max-width: 576px) {
                 .login-container {
                     margin: 1rem;
                     max-width: calc(100% - 2rem);
                 }
-                
-                .login-header {
-                    padding: 2rem 1.5rem 1.5rem;
-                }
-                
-                .login-form {
-                    padding: 2rem 1.5rem;
-                }
+                .login-header { padding: 1.75rem 1.25rem 1.25rem; }
+                .login-form { padding: 1.5rem; }
             }
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container py-5">
             <div class="row justify-content-center">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class="col-12 col-sm-9 col-md-7 col-lg-5 col-xl-4">
                     <div class="login-container">
                         <div class="login-header">
-                            
+                            <img src="../assets/images/logo.png" alt="Christ Ekklesia Fellowship Chapel Logo" class="brand-logo">
                             <h2>Church Admin</h2>
                             <p>Sign in to your account</p>
                         </div>
@@ -309,7 +315,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
                                 </div>
                             <?php endif; ?>
                             
-                            <form method="post">
+                            <form method="post" novalidate>
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="username" name="username" required>
                                     <i class="fas fa-user input-icon"></i>
@@ -319,7 +325,15 @@ if (!isset($_SESSION['admin_logged_in'])) {
                                 <div class="form-floating">
                                     <input type="password" class="form-control" id="password" name="password" required>
                                     <i class="fas fa-lock input-icon"></i>
+                                    <button type="button" class="toggle-password" aria-label="Show password" onclick="togglePw()"><i class="far fa-eye"></i></button>
                                     <label for="password">Password</label>
+                                </div>
+                                <div class="login-meta">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="remember">
+                                        <label class="form-check-label" for="remember">Remember me</label>
+                                    </div>
+                                    <a href="#">Forgot password?</a>
                                 </div>
                                 
                                 <button type="submit" name="login" class="btn btn-primary btn-login">
@@ -335,6 +349,16 @@ if (!isset($_SESSION['admin_logged_in'])) {
         </div>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function togglePw() {
+                const input = document.getElementById('password');
+                const btn = document.querySelector('.toggle-password i');
+                const isPw = input.getAttribute('type') === 'password';
+                input.setAttribute('type', isPw ? 'text' : 'password');
+                btn.classList.toggle('fa-eye');
+                btn.classList.toggle('fa-eye-slash');
+            }
+        </script>
     </body>
     </html>
     <?php

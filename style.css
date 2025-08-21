@@ -28,6 +28,7 @@ body {
     line-height: 1.7;
     color: var(--text-dark);
     font-weight: 400;
+    overflow-x: hidden; /* prevent 100vw full-bleed from causing horizontal scroll */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -537,6 +538,19 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: auto;
 }
 
+/* Ensure 'Learn More' buttons are visible on white card background */
+.ministry-card .btn.btn-outline-light {
+    color: var(--primary-purple);
+    border-color: var(--primary-purple);
+}
+
+.ministry-card .btn.btn-outline-light:hover,
+.ministry-card .btn.btn-outline-light:focus {
+    background-color: var(--primary-purple);
+    color: var(--white);
+    border-color: var(--primary-purple);
+}
+
 .ministry-card-btn {
     background: var(--primary-purple);
     color: var(--white);
@@ -762,6 +776,53 @@ strong {
         font-size: 0.9rem;
         padding: 12px 24px;
     }
+}
+
+/* ==========================
+   Ministry Pages - Layout
+   ========================== */
+/* Unbox ministry content (full-width) */
+.ministry-section.container,
+.ministry-section .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Remove top margin from ministry pages; keep bottom spacing */
+.ministry-section.container {
+    margin-top: 0 !important; /* overrides Bootstrap my-5 top margin */
+}
+
+/* Remove Bootstrap horizontal gutters inside ministry pages to avoid edge bleed */
+.ministry-section .row {
+    --bs-gutter-x: 0;
+}
+
+/* Ensure surrounding section is white so edges don't show theme gradients */
+.ministry-section {
+    background-color: #fff;
+}
+
+/* Full-bleed hero across viewport */
+.ministry-hero {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #fff; /* ensure no purple background shows at edges */
+    overflow: hidden; /* hide any sub-pixel overflow */
+    margin-bottom: 2rem; /* add spacing after hero instead of above */
+}
+
+.ministry-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0; /* remove rounding to blend edge-to-edge */
 }
 .guideline-card * {
     position: relative;

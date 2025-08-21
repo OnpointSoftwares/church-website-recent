@@ -30,6 +30,11 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <p>&copy; 2025 Christ Ekklesia Fellowship Chapel. All rights reserved.</p>
+                <p class="mb-0">Crafted by 
+                    <a href="https://onpointsoft.pythonanywhere.com" target="_blank" rel="noopener" class="text-white text-decoration-underline">
+                        Onpoint Softwares Solutions
+                    </a>
+                </p>
             </div>
         </div>
     </div>

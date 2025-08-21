@@ -869,45 +869,6 @@
         </div>
     </div>
 
-    <div id="login-page" class="login-container" style="display: flex;">
-        <form id="signup-form" style="display:none; margin-top:2rem;">
-            <h2>Volunteer Signup</h2>
-            <div class="form-group">
-                <label for="signup-name">Full Name:</label>
-                <input type="text" class="form-control" id="signup-name" required>
-            </div>
-            <div class="form-group">
-                <label for="signup-email">Email:</label>
-                <input type="email" class="form-control" id="signup-email" required>
-            </div>
-            <div class="form-group">
-                <label for="signup-phone">Phone:</label>
-                <input type="text" class="form-control" id="signup-phone">
-            </div>
-            <div class="form-group">
-                <label for="signup-password">Password:</label>
-                <input type="password" class="form-control" id="signup-password" required>
-            </div>
-            <button type="submit" class="btn btn-success">Sign Up</button>
-            <button type="button" class="btn btn-link" id="cancel-signup">Cancel</button>
-            <div id="signup-alerts" class="mt-2"></div>
-        </form>
-        <form id="otp-form" style="display:none; margin-top:2rem;">
-            <h2>Admin OTP Verification</h2>
-            <div class="form-group">
-                <label for="otp-email">Volunteer Email:</label>
-                <input type="email" class="form-control" id="otp-email" required>
-            </div>
-            <div class="form-group">
-                <label for="otp-code">OTP Code:</label>
-                <input type="text" class="form-control" id="otp-code" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Verify</button>
-            <button type="button" class="btn btn-link" id="cancel-otp">Cancel</button>
-            <div id="otp-alerts" class="mt-2"></div>
-        </form>
-    </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
         // Check for existing session on page load

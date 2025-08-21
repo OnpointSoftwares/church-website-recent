@@ -568,7 +568,7 @@ include dirname(__DIR__) . '/includes/header.php';
                                 Building young hearts for Christ through age-appropriate worship and biblical teaching.
                             </div>
                             <div class="ministry-card-actions">
-                                <a href="templates/ministries/childrens-ministry.html" class="btn btn-outline-light">Learn More</a>
+                                <a href="/ministries/childrens-ministry" class="btn btn-outline-light">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -585,7 +585,7 @@ include dirname(__DIR__) . '/includes/header.php';
                                 Empowering teenagers to live for Christ in today's world through discipleship and fellowship.
                             </div>
                             <div class="ministry-card-actions">
-                                <a href="#" class="btn btn-outline-light">Learn More</a>
+                                <a href="/ministries/youth-ministry" class="btn btn-outline-light">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -602,7 +602,7 @@ include dirname(__DIR__) . '/includes/header.php';
                                 Leading the congregation in heartfelt worship through music, praise, and spiritual expression.
                             </div>
                             <div class="ministry-card-actions">
-                                <a href="templates/ministries/worship-team.html" class="btn btn-outline-light">Learn More</a>
+                                <a href="/ministries/worship-team" class="btn btn-outline-light">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -619,7 +619,7 @@ include dirname(__DIR__) . '/includes/header.php';
                                 Enhancing worship experiences through audio, video, and media technology.
                             </div>
                             <div class="ministry-card-actions">
-                                <a href="#" class="btn btn-outline-light">Learn More</a>
+                                <a href="/ministries/sound-media-ministry" class="btn btn-outline-light">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -636,7 +636,7 @@ include dirname(__DIR__) . '/includes/header.php';
                                 Welcoming and serving our congregation with hospitality and care.
                             </div>
                             <div class="ministry-card-actions">
-                                <a href="#" class="btn btn-outline-light">Learn More</a>
+                                <a href="/ministries/ushering-ministry" class="btn btn-outline-light">Learn More</a>
                             </div>
                         </div>
                     </div>

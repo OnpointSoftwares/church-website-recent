@@ -218,7 +218,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
             .form-control {
                 border: 2px solid rgba(96, 55, 158, 0.1);
                 border-radius: 12px;
-                padding: 1rem 1rem 1rem 3rem;
+                padding: 1rem 2.75rem 1rem 3rem; /* room for right eye icon */
                 font-size: 1rem;
                 transition: var(--transition);
                 background: rgba(248, 250, 252, 0.8);
@@ -239,6 +239,11 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 z-index: 5;
                 transition: var(--transition);
             }
+            /* Ensure floating label clears the left icon */
+            .form-floating > label { left: 3rem; }
+            .form-floating > .form-control::placeholder { color: transparent; }
+            .form-floating > .form-control:-ms-input-placeholder { color: transparent; }
+            .form-floating > .form-control::-ms-input-placeholder { color: transparent; }
             .toggle-password {
                 position: absolute;
                 right: 0.75rem;
@@ -317,13 +322,13 @@ if (!isset($_SESSION['admin_logged_in'])) {
                             
                             <form method="post" novalidate>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                                     <i class="fas fa-user input-icon"></i>
                                     <label for="username">Username</label>
                                 </div>
                                 
                                 <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                     <i class="fas fa-lock input-icon"></i>
                                     <button type="button" class="toggle-password" aria-label="Show password" onclick="togglePw()"><i class="far fa-eye"></i></button>
                                     <label for="password">Password</label>

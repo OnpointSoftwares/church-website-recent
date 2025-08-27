@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Home Page -->
+    <url>
+        <loc>https://christekklesia.org/</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://christekklesia.org/assets/images/logo.png</image:loc>
+            <image:title>Christ Ekklesia Fellowship Chapel Logo</image:title>
+        </image:image>
+    </url>
+    
+    <!-- About Section -->
+    <url>
+        <loc>https://christekklesia.org/#about</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Services Section -->
+    <url>
+        <loc>https://christekklesia.org/#services</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Ministries Section -->
+    <url>
+        <loc>https://christekklesia.org/#ministries</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Contact Section -->
+    <url>
+        <loc>https://christekklesia.org/#contact</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Volunteers Page -->
+    <url>
+        <loc>https://christekklesia.org/volunteers</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Calendar Page -->
+    <url>
+        <loc>https://christekklesia.org/calendar</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Giving Page -->
+    <url>
+        <loc>https://christekklesia.org/giving</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Constitution Page -->
+    <url>
+        <loc>https://christekklesia.org/constitution</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Privacy Policy -->
+    <url>
+        <loc>https://christekklesia.org/privacy-policy</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- Terms of Service -->
+    <url>
+        <loc>https://christekklesia.org/terms-of-service</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+</urlset>

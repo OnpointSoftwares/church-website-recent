@@ -1,19 +1,91 @@
 <?php 
-$pageTitle = "Youth Ministry | Christ Ekklesia Fellowship Chapel";
+/**
+ * Youth Ministry Page - Christ Ekklesia Fellowship Chapel
+ * 
+ * Production-ready youth ministry page with SEO optimization and enhanced content.
+ */
+
+// SEO Configuration
+$pageTitle = "Youth Ministry - Christ Ekklesia Fellowship Chapel | Empowering Young Leaders";
+$pageDescription = "Join our vibrant Youth Ministry at Christ Ekklesia Fellowship Chapel. Raising a Christ-centered generation equipped to live and lead for Jesus in Kabarak, Nakuru.";
+$pageKeywords = "youth ministry, young adults, teenagers, Christian youth, discipleship, Kabarak youth, Christ Ekklesia youth, church youth group";
+$pageType = "article";
+$pageImage = "/assets/images/youth-ministry-hero.jpg";
+
+// Page-specific scripts
+$pageScripts = [
+    '/assets/js/ministry-page.js'
+];
+
 include dirname(__DIR__) . '/../includes/header.php'; 
 ?>
 
-<div class="ministry-section container my-5">
+<!-- Main Content -->
+<main id="main-content" class="ministry-section container-fluid px-0">
+    <!-- Ministry Hero Section -->
+    <section class="ministry-hero-section position-relative mb-5" style="background: linear-gradient(rgba(96, 55, 158, 0.8), rgba(142, 68, 173, 0.8)), url('/assets/images/youth-ministry-hero.jpg') center/cover no-repeat; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+        <div class="container text-center text-white py-5">
+            <div class="hero-content animate-fade-in">
+                <h1 class="display-4 fw-bold mb-3" style="text-shadow: 0 4px 20px rgba(0,0,0,0.3);">Youth Ministry</h1>
+                <p class="lead mb-4">Raising a Christ-centered generation equipped to live and lead for Jesus</p>
+                <div class="hero-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center bg-transparent">
+                            <li class="breadcrumb-item"><a href="/" class="text-white-50">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/#ministries" class="text-white-50">Ministries</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Youth Ministry</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministry Content -->
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <div class="ministry-hero fade-in">
-                    <img src="../../assets/images/youths.jpg" alt="Youth Ministry" class="img-fluid rounded">
+                <div class="ministry-intro mb-5 text-center">
+                    <img src="/assets/images/youths.jpg" alt="Youth Ministry" class="img-fluid rounded shadow mb-4" loading="lazy">
+                    <p class="lead">Our Youth Ministry is passionate about empowering the next generation to know God deeply, live boldly for Christ, and impact their world with the Gospel. We believe young people are not just the church of tomorrow, but the church of today.</p>
                 </div>
 
-                <div class="ministry-content fade-in">
-                    <h2>Youth Ministry</h2>
-                    <p class="lead">Raising a Christ-centered generation equipped to live and lead for Jesus</p>
+                <!-- Ministry Overview -->
+                <div class="ministry-overview mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="mb-3">Our Mission</h2>
+                            <p class="mb-3">To disciple teenagers and young adults to know God deeply, walk in holiness, and serve their church and community with boldness and love. We create an environment where young people can grow spiritually, build meaningful relationships, and discover their God-given purpose.</p>
+                            <div class="ministry-stats">
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h4 class="stat-number text-primary">50+</h4>
+                                            <p class="stat-label small">Active Youth</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h4 class="stat-number text-primary">12-25</h4>
+                                            <p class="stat-label small">Age Range</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h4 class="stat-number text-primary">Weekly</h4>
+                                            <p class="stat-label small">Meetings</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="ministry-icon-large">
+                                <i class="fas fa-users" style="font-size: 4rem; color: var(--primary-color);"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                     <div class="ministry-section mt-5">
                         <h3 class="mb-4" style="color: var(--primary-color); font-family: 'Playfair Display', serif;">Our Vision</h3>

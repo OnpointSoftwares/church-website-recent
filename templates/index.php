@@ -1,22 +1,42 @@
 <?php 
-$pageTitle = "Home | Christ Ekklesia Fellowship Chapel";
+/**
+ * Home Page Template - Christ Ekklesia Fellowship Chapel
+ * 
+ * Production-ready homepage with SEO optimization, performance enhancements,
+ * and comprehensive content sections.
+ */
+
+// SEO Configuration
+$pageTitle = "Christ Ekklesia Fellowship Chapel - Where Christ Takes Preeminence";
+$pageDescription = "Join Christ Ekklesia Fellowship Chapel in Kabarak, Nakuru for authentic worship, biblical teaching, and vibrant Christian fellowship. Experience God's love in our welcoming community.";
+$pageKeywords = "Christ Ekklesia Fellowship Chapel, church Nakuru, Kabarak church, Christian fellowship, worship service, bible study, ministry, Kenya church";
+$pageType = "website";
+$pageImage = "/assets/images/church-hero.jpg";
+
+// Page-specific scripts
+$pageScripts = [
+    '/assets/js/home-animations.js',
+    '/assets/js/contact-form.js'
+];
+
 include dirname(__DIR__) . '/includes/header.php'; 
 ?>
 
-<div class="home-section container-fluid px-0">
+<!-- Main Content -->
+<main id="main-content" class="home-section container-fluid px-0">
    <!-- Hero Section -->
-   <section id="home" class="hero-section">
-        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+   <section id="home" class="hero-section" aria-label="Welcome to Christ Ekklesia Fellowship Chapel">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000" aria-label="Church highlights carousel">
             <!-- Indicators -->
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1: Welcome to our church"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2: Community of faith"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3: Ministries and service"></button>
             </div>
 
             <!-- Slides -->
             <div class="carousel-inner">
-                <!-- Slide 1 -->
+                <!-- Slide 1: Welcome -->
                 <div class="carousel-item active">
                     <div class="d-flex align-items-center min-vh-100">
                         <div class="container">
@@ -24,14 +44,38 @@ include dirname(__DIR__) . '/includes/header.php';
                                 <div class="col-lg-8 hero-content animate-fade-in">
                                     <h1 class="hero-title">Christ Ekklesia Fellowship Chapel</h1>
                                     <p class="hero-subtitle">Where Christ Takes the Preeminence of Our Worship</p>
-                                    <p class="lead mb-4">Join us in celebrating the supremacy of Christ in all things. Experience authentic worship, biblical teaching, and fellowship rooted in God's love.</p>
-                                    <div class="d-flex gap-3">
-                                        <button class="btn btn-primary btn-lg">Join Our Worship</button>
-                                        <button class="btn btn-outline-light btn-lg">Learn More</button>
+                                    <p class="lead mb-4">Join us in celebrating the supremacy of Christ in all things. Experience authentic worship, biblical teaching, and fellowship rooted in God's love in Kabarak, Nakuru.</p>
+                                    <div class="hero-stats mb-4">
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <div class="stat-item">
+                                                    <h3 class="stat-number">200+</h3>
+                                                    <p class="stat-label">Members</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="stat-item">
+                                                    <h3 class="stat-number">6+</h3>
+                                                    <p class="stat-label">Years</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="stat-item">
+                                                    <h3 class="stat-number">8+</h3>
+                                                    <p class="stat-label">Ministries</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <a href="#services" class="btn btn-primary btn-lg">Join Our Worship</a>
+                                        <a href="#about" class="btn btn-outline-light btn-lg">Learn More</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 text-center">
-                                    <img src="./assets/images/logo.png" alt="Christ Ekklesians Fellowship Chapel Logo" class="navbar-logo me-2" height="50">
+                                    <div class="hero-logo-container">
+                                        <img src="./assets/images/logo.png" alt="Christ Ekklesia Fellowship Chapel Logo" class="hero-logo img-fluid" loading="eager">
+                                    </div>
                                 </div>
                             
 </div>
@@ -39,7 +83,7 @@ include dirname(__DIR__) . '/includes/header.php';
                     </div>
                 </div>
 
-                <!-- Slide 2 -->
+                <!-- Slide 2: Community -->
                 <div class="carousel-item">
                     <div class="d-flex align-items-center min-vh-100">
                         <div class="container">
@@ -47,39 +91,125 @@ include dirname(__DIR__) . '/includes/header.php';
                                 <div class="col-lg-8 hero-content animate-fade-in">
                                     <h1 class="hero-title">Community of Faith</h1>
                                     <p class="hero-subtitle">Growing Together in Christ</p>
-                                    <p class="lead mb-4">Join our vibrant community of believers who are passionate about knowing and following Jesus.</p>
-                                    <div class="d-flex gap-3">
-                                        <button class="btn btn-primary btn-lg">Get Involved</button>
-                                        <button class="btn btn-outline-light btn-lg">Learn More</button>
+                                    <p class="lead mb-4">Join our vibrant community of believers who are passionate about knowing and following Jesus. Experience the warmth of Christian fellowship in Kabarak, Nakuru.</p>
+                                    <div class="hero-features mb-4">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="feature-item d-flex align-items-center">
+                                                    <i class="fas fa-users feature-icon me-3"></i>
+                                                    <div>
+                                                        <h5 class="mb-1">Fellowship</h5>
+                                                        <p class="mb-0 small">Authentic Christian community</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="feature-item d-flex align-items-center">
+                                                    <i class="fas fa-book-open feature-icon me-3"></i>
+                                                    <div>
+                                                        <h5 class="mb-1">Bible Study</h5>
+                                                        <p class="mb-0 small">Weekly spiritual growth</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="feature-item d-flex align-items-center">
+                                                    <i class="fas fa-pray feature-icon me-3"></i>
+                                                    <div>
+                                                        <h5 class="mb-1">Prayer</h5>
+                                                        <p class="mb-0 small">Powerful prayer meetings</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="feature-item d-flex align-items-center">
+                                                    <i class="fas fa-heart feature-icon me-3"></i>
+                                                    <div>
+                                                        <h5 class="mb-1">Care</h5>
+                                                        <p class="mb-0 small">Supporting one another</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <a href="/volunteers" class="btn btn-primary btn-lg">Get Involved</a>
+                                        <a href="#ministries" class="btn btn-outline-light btn-lg">Our Ministries</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 text-center">
-                                    <img src="./assets/images/logo.png" alt="Christ Ekklesians Fellowship Chapel Logo" class="navbar-logo me-2" height="50">
+                                    <div class="community-visual">
+                                        <div class="community-icons">
+                                            <i class="fas fa-church community-icon"></i>
+                                            <i class="fas fa-hands-praying community-icon"></i>
+                                            <i class="fas fa-cross community-icon"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a href="#ministries" class="btn btn-outline-light mt-3 learn-more-btn">Learn More</a>
 </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Slide 3 -->
+                <!-- Slide 3: Service Times -->
                 <div class="carousel-item">
                     <div class="d-flex align-items-center min-vh-100">
                         <div class="container">
                             <div class="row align-items-center">
                                 <div class="col-lg-8 hero-content animate-fade-in">
-                                    <h1 class="hero-title">Transforming Lives</h1>
-                                    <p class="hero-subtitle">Through the Power of the Gospel</p>
-                                    <p class="lead mb-4">Discover how God's Word can change your life and community through our dynamic teaching and ministries.</p>
-                                    <div class="d-flex gap-3">
-                                        <button class="btn btn-primary btn-lg">Find a Service</button>
-                                        <button class="btn btn-outline-light btn-lg">Learn More</button>
+                                    <h1 class="hero-title">Join Us for Worship</h1>
+                                    <p class="hero-subtitle">Experience God's Presence with Us</p>
+                                    <p class="lead mb-4">Come and worship with us every week. All are welcome to experience God's love and grace in our services.</p>
+                                    <div class="service-times mb-4">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <div class="service-card text-center">
+                                                    <div class="service-icon mb-2">
+                                                        <i class="fas fa-sun"></i>
+                                                    </div>
+                                                    <h5 class="service-title">Sunday Worship</h5>
+                                                    <p class="service-time">10:00 AM</p>
+                                                    <p class="service-desc small">Main worship service</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="service-card text-center">
+                                                    <div class="service-icon mb-2">
+                                                        <i class="fas fa-book-open"></i>
+                                                    </div>
+                                                    <h5 class="service-title">Bible Study</h5>
+                                                    <p class="service-time">Wednesday 7:00 PM</p>
+                                                    <p class="service-desc small">Midweek study</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <div class="service-card text-center">
+                                                    <div class="service-icon mb-2">
+                                                        <i class="fas fa-praying-hands"></i>
+                                                    </div>
+                                                    <h5 class="service-title">Prayer Meeting</h5>
+                                                    <p class="service-time">Friday 6:30 PM</p>
+                                                    <p class="service-desc small">Corporate prayer</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <a href="/calendar" class="btn btn-primary btn-lg">View Calendar</a>
+                                        <a href="#contact" class="btn btn-outline-light btn-lg">Get Directions</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 text-center">
-                                    <img src="./assets/images/logo.png" alt="Christ Ekklesians Fellowship Chapel Logo" class="navbar-logo me-2" height="50">
+                                    <div class="location-info">
+                                        <div class="location-card">
+                                            <i class="fas fa-map-marker-alt location-icon mb-3"></i>
+                                            <h5>Find Us</h5>
+                                            <p class="mb-2"><strong>Kabarak, Nakuru</strong></p>
+                                            <p class="small text-light">Kenya</p>
+                                            <a href="#contact" class="btn btn-outline-light btn-sm mt-2">Get Directions</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a href="#ministries" class="btn btn-outline-light mt-3 learn-more-btn">Learn More</a>
 </div>
                         </div>
                     </div>
@@ -555,7 +685,7 @@ include dirname(__DIR__) . '/includes/header.php';
                     <h2 class="section-title">Our Ministries</h2>
                 </div>
             </div>
-            <div class="row g-4">
+            <div class="row g-4 ministry-grid">
                 <div class="col-lg-3 col-md-6">
                     <div class="ministry-card">
                         <img src="./assets/images/sunday-school.jpg" alt="Children's Ministry" class="ministry-card-image">
@@ -808,6 +938,7 @@ include dirname(__DIR__) . '/includes/header.php';
     </section>
 
     
-</div>
+</main>
+<!-- End Main Content -->
 
 <?php include dirname(__DIR__) . '/includes/footer.php'; ?>

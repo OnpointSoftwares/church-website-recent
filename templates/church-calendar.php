@@ -1,13 +1,45 @@
 <?php 
-$pageTitle = "2025 Ministry Calendar | Christ Ekklesia Fellowship Chapel";
+/**
+ * Church Calendar Page - Christ Ekklesia Fellowship Chapel
+ * 
+ * Production-ready calendar page with SEO optimization and enhanced content.
+ */
+
+// SEO Configuration
+$pageTitle = "2025 Ministry Calendar - Christ Ekklesia Fellowship Chapel | Year of Eternal Legislation";
+$pageDescription = "Discover our 2025 Ministry Calendar at Christ Ekklesia Fellowship Chapel. Join us for worship services, youth outings, evangelism crusades, and community outreach in Kabarak, Nakuru.";
+$pageKeywords = "church calendar 2025, ministry events, worship services, youth ministry, evangelism, community outreach, Christ Ekklesia events, Kabarak church calendar";
+$pageType = "article";
+$pageImage = "/assets/images/calendar-hero.jpg";
+
+// Page-specific scripts
+$pageScripts = [
+    '/assets/js/calendar-page.js'
+];
+
 include dirname(__DIR__) . '/includes/header.php'; 
 ?>
 
-<div class="calendar-section container my-5">
-<section class="hero-section position-relative mb-5" style="background: url('../assets/images/sunday-school.jpg') center/cover no-repeat; min-height: 320px; display: flex; align-items: center; justify-content: center;">
-        <div class="container text-center text-white py-5" style="background: rgba(76,29,149,0.24); border-radius: 1.5rem;">
-            <h1 class="display-4 fw-bold mb-2" style="text-shadow: 0 4px 20px rgba(0,0,0,0.25);">2025 Ministry Calendar</h1>
-            <p class="lead mb-0">Our Year of Eternal Legislation</p>
+<!-- Main Content -->
+<main id="main-content" class="calendar-section container-fluid px-0">
+    <!-- Calendar Hero Section -->
+    <section class="hero-section position-relative mb-5" style="background: linear-gradient(rgba(96, 55, 158, 0.8), rgba(142, 68, 173, 0.8)), url('/assets/images/calendar-hero.jpg') center/cover no-repeat; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+        <div class="container text-center text-white py-5">
+            <div class="hero-content animate-fade-in">
+                <h1 class="display-4 fw-bold mb-3" style="text-shadow: 0 4px 20px rgba(0,0,0,0.3);">2025 Ministry Calendar</h1>
+                <p class="lead mb-4">Our Year of Eternal Legislation</p>
+                <div class="hero-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center bg-transparent">
+                            <li class="breadcrumb-item"><a href="/" class="text-white-50">Home</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Calendar 2025</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="calendar-year-badge">
+                    <span class="badge bg-light text-primary fs-6 px-4 py-2">Year 2025</span>
+                </div>
+            </div>
         </div>
     </section>
     <div class="container" style="max-width: 900px; margin-bottom: 40px;">

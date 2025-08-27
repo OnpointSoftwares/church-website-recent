@@ -1,0 +1,64 @@
+# Robots.txt for Christ Ekklesia Fellowship Chapel
+# https://christekklesia.org/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin areas and sensitive files
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /uploads/volunteers/
+Disallow: /*.php$
+Disallow: /config.php
+Disallow: /.env
+Disallow: /.htaccess
+Disallow: /error.php
+
+# Allow specific important pages
+Allow: /index.php
+Allow: /volunteers.php
+Allow: /calendar.php
+Allow: /giving.php
+
+# Allow CSS, JS, and images
+Allow: /assets/
+Allow: /style.css
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.ico
+
+# Sitemap location
+Sitemap: https://christekklesia.org/sitemap.xml
+
+# Crawl delay (be respectful)
+Crawl-delay: 1
+
+# Specific bot instructions
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

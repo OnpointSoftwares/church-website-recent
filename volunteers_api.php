@@ -1,8 +1,93 @@
 <?php
-// volunteers_api.php: Handles AJAX for volunteer portal
+/**
+ * Volunteer Portal API - Production Ready
+ * 
+ * Secure API endpoints for volunteer portal with enhanced security,
+ * proper error handling, and comprehensive logging.
+ * 
+ * @version 2.0.0
+ * @author Onpoint Softwares Solutions
+ */
+
+// Security headers
+header('Content-Type: application/json');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+
+// Start session with security settings
 session_start();
 
-$response = ['success' => false, 'message' => 'Unknown error'];
+// Rate limiting configuration
+define('MAX_ATTEMPTS', 5);
+define('LOCKOUT_TIME', 900); // 15 minutes
+
+// Initialize response
+$response = ['success' => false, 'message' => 'Invalid request'];
+
+// Security functions
+function sanitizeInput($input) {
+    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+}
+
+function checkRateLimit($identifier, $action) {
+    $key = 'rate_limit_' . $action . '_' . md5($identifier);
+    
+    if (!isset($_SESSION[$key])) {
+        $_SESSION[$key] = ['count' => 0, 'first_attempt' => time()];
+    }
+    
+    $attempts = $_SESSION[$key];
+    
+    if (time() - $attempts['first_attempt'] > LOCKOUT_TIME) {
+        $_SESSION[$key] = ['count' => 0, 'first_attempt' => time()];
+        return true;
+    }
+    
+    return $attempts['count'] < MAX_ATTEMPTS;
+}
+
+function recordFailedAttempt($identifier, $action) {
+    $key = 'rate_limit_' . $action . '_' . md5($identifier);
+    
+    if (!isset($_SESSION[$key])) {
+        $_SESSION[$key] = ['count' => 0, 'first_attempt' => time()];
+    }
+    
+    $_SESSION[$key]['count']++;
+}
+
+function clearAttempts($identifier, $action) {
+    $key = 'rate_limit_' . $action . '_' . md5($identifier);
+    unset($_SESSION[$key]);
+}
+
+function logSecurityEvent($message, $level = 'INFO') {
+    $timestamp = date('Y-m-d H:i:s');
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
+    $logEntry = "[$timestamp] [$level] $message | IP: $ip | UA: $userAgent" . PHP_EOL;
+    
+    $logFile = __DIR__ . '/admin/logs/volunteers.log';
+    $logDir = dirname($logFile);
+    
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0755, true);
+    }
+    
+    file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
+}
+
+// Verify CSRF token for POST requests
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $csrfToken = $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+    if (!isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
+        logSecurityEvent('CSRF token mismatch in volunteers API', 'SECURITY');
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Security token mismatch']);
+        exit;
+    }
+}
 
 // Commitment form upload
 if (isset($_POST['action']) && $_POST['action'] === 'upload_commitment') {
@@ -143,12 +228,37 @@ if (isset($_POST['action']) && $_POST['action'] === 'verify_otp') {
 
 // Login from volunteers table (DB)
 if (isset($_POST['action']) && $_POST['action'] === 'login') {
-    require_once __DIR__.'/config.php';
-    $email = trim($_POST['email'] ?? '');
+    $email = sanitizeInput($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
-    if (!$email || !$password) {
-        echo json_encode(['success'=>false,'message'=>'Email and password required.']); exit;
+    $clientIP = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    
+    // Check rate limiting
+    if (!checkRateLimit($clientIP, 'login')) {
+        logSecurityEvent("Rate limit exceeded for login attempt from IP: $clientIP", 'SECURITY');
+        http_response_code(429);
+        echo json_encode([
+            'success' => false, 
+            'message' => 'Too many login attempts. Please try again in 15 minutes.',
+            'locked' => true
+        ]);
+        exit;
     }
+    
+    // Validate input
+    if (empty($email) || empty($password)) {
+        recordFailedAttempt($clientIP, 'login');
+        echo json_encode(['success' => false, 'message' => 'Email and password are required.']);
+        exit;
+    }
+    
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        recordFailedAttempt($clientIP, 'login');
+        logSecurityEvent("Invalid email format in login attempt: $email", 'SECURITY');
+        echo json_encode(['success' => false, 'message' => 'Please enter a valid email address.']);
+        exit;
+    }
+    
+    require_once __DIR__.'/config.php';
     try {
         if (!isset($pdo)) {
             $host = defined('DB_HOST') ? DB_HOST : 'localhost';
@@ -163,8 +273,15 @@ if (isset($_POST['action']) && $_POST['action'] === 'login') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user && password_verify($password, $user['password'])) {
             if (!$user['verified']) {
-                echo json_encode(['success'=>false,'message'=>'Account not yet verified by admin.']); exit;
+                recordFailedAttempt($clientIP, 'login');
+                logSecurityEvent("Login attempt on unverified account: $email", 'SECURITY');
+                echo json_encode(['success' => false, 'message' => 'Account not yet verified by admin.']);
+                exit;
             }
+            
+            // Successful login
+            clearAttempts($clientIP, 'login');
+            
             $_SESSION['volunteer'] = [
                 'id' => $user['id'],
                 'name' => $user['name'],
@@ -173,11 +290,28 @@ if (isset($_POST['action']) && $_POST['action'] === 'login') {
                 'ministry' => $user['ministry'],
                 'role' => 'Active Volunteer',
                 'join_date' => date('F Y', strtotime($user['created_at'])),
-                'avatar' => strtoupper(substr($user['name'],0,1)) . strtoupper(substr($user['email'],0,1))
+                'avatar' => strtoupper(substr($user['name'], 0, 1)) . strtoupper(substr($user['email'], 0, 1)),
+                'last_login' => time()
             ];
-            echo json_encode(['success'=>true,'user'=>$_SESSION['volunteer']]); exit;
+            
+            // Update last login in database
+            try {
+                $updateStmt = $pdo->prepare("UPDATE volunteers SET last_login = NOW() WHERE id = ?");
+                $updateStmt->execute([$user['id']]);
+            } catch (Exception $e) {
+                // Log but don't fail the login
+                logSecurityEvent("Failed to update last login for user ID {$user['id']}: " . $e->getMessage(), 'WARNING');
+            }
+            
+            logSecurityEvent("Successful login for volunteer: $email (ID: {$user['id']})", 'INFO');
+            echo json_encode(['success' => true, 'user' => $_SESSION['volunteer']]);
+            exit;
         } else {
-            echo json_encode(['success'=>false,'message'=>'Invalid credentials.']); exit;
+            // Failed login
+            recordFailedAttempt($clientIP, 'login');
+            logSecurityEvent("Failed login attempt for email: $email", 'SECURITY');
+            echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);
+            exit;
         }
     } catch (Exception $e) {
         echo json_encode(['success'=>false,'message'=>'Error: ' . $e->getMessage()]); exit;

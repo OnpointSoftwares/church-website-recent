@@ -1,19 +1,91 @@
 <?php 
-$pageTitle = "Worship Team | Christ Ekklesia Fellowship Chapel";
+/**
+ * Worship Team Ministry Page - Christ Ekklesia Fellowship Chapel
+ * 
+ * Production-ready ministry page with SEO optimization and enhanced content.
+ */
+
+// SEO Configuration
+$pageTitle = "Worship Team Ministry - Christ Ekklesia Fellowship Chapel";
+$pageDescription = "Join our Worship Team Ministry at Christ Ekklesia Fellowship Chapel. Lead the congregation in Spirit-filled worship through music, singing, and heartfelt praise in Kabarak, Nakuru.";
+$pageKeywords = "worship team, church music ministry, praise and worship, Kabarak church music, Christ Ekklesia worship, church choir, music ministry";
+$pageType = "article";
+$pageImage = "/assets/images/worship-team-hero.jpg";
+
+// Page-specific scripts
+$pageScripts = [
+    '/assets/js/ministry-page.js'
+];
+
 include dirname(__DIR__) . '/../includes/header.php'; 
 ?>
 
-<div class="ministry-section container my-5">
-<div class="container py-5">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="ministry-hero fade-in">
-                        <img src="../../assets/images/worship-team.jpg" alt="Worship Team Ministry" class="img-fluid rounded">
-                    </div>
+<!-- Main Content -->
+<main id="main-content" class="ministry-section container-fluid px-0">
+    <!-- Ministry Hero Section -->
+    <section class="ministry-hero-section position-relative mb-5" style="background: linear-gradient(rgba(96, 55, 158, 0.8), rgba(142, 68, 173, 0.8)), url('/assets/images/worship-team-hero.jpg') center/cover no-repeat; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+        <div class="container text-center text-white py-5">
+            <div class="hero-content animate-fade-in">
+                <h1 class="display-4 fw-bold mb-3" style="text-shadow: 0 4px 20px rgba(0,0,0,0.3);">Worship Team Ministry</h1>
+                <p class="lead mb-4">Leading the congregation in heartfelt, Spirit-filled worship</p>
+                <div class="hero-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center bg-transparent">
+                            <li class="breadcrumb-item"><a href="/" class="text-white-50">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/#ministries" class="text-white-50">Ministries</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Worship Team</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministry Content -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="ministry-intro mb-5 text-center">
+                    <img src="/assets/images/worship-team.jpg" alt="Worship Team Ministry" class="img-fluid rounded shadow mb-4" loading="lazy">
+                    <p class="lead">Music and worship are central to our faith expression at Christ Ekklesia Fellowship Chapel. Our Worship Team is dedicated to creating an atmosphere where hearts can connect with God through powerful, authentic worship.</p>
+                </div>
                     
-                    <div class="ministry-content fade-in">
-                        <h2>Worship Team Ministry</h2>
-                        <p class="lead">Leading the congregation in heartfelt, Spirit-filled worship</p>
+                <!-- Ministry Overview -->
+                <div class="ministry-overview mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="mb-3">Our Calling</h2>
+                            <p class="mb-3">The Worship Team Ministry is called to usher the congregation into the presence of God through anointed music and heartfelt worship. We believe that worship is not just about music, but about creating an atmosphere where hearts can encounter the living God.</p>
+                            <div class="ministry-stats">
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h4 class="stat-number text-primary">15+</h4>
+                                            <p class="stat-label small">Team Members</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h4 class="stat-number text-primary">3</h4>
+                                            <p class="stat-label small">Services/Week</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="stat-item">
+                                            <h4 class="stat-number text-primary">6+</h4>
+                                            <p class="stat-label small">Years Active</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="ministry-icon-large">
+                                <i class="fas fa-music" style="font-size: 4rem; color: var(--primary-color);"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                         
                         <div class="ministry-section mt-5">
                             <h3 class="mb-4" style="color: var(--primary-color); font-family: 'Playfair Display', serif;">Principles of Worship</h3>
@@ -130,18 +202,63 @@ include dirname(__DIR__) . '/../includes/header.php';
                             </div>
                         </div>
 
-                        <div class="ministry-section mt-5">
-                            <h3 class="mb-4" style="color: var(--primary-color); font-family: 'Playfair Display', serif;">Contact Information</h3>
-                            <div class="contact-info">
-                                <p><i class="fas fa-envelope me-2"></i>Email: worship@christekklesians.org</p>
-                                <p><i class="fas fa-phone me-2"></i>Phone: (254) 727923192</p>
-                                <p><i class="fas fa-user me-2"></i>Worship Pastor: Mr Kevin Khamadi</p>
+                <!-- Call to Action Section -->
+                <div class="ministry-cta mt-5">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body text-center py-5">
+                            <h3 class="card-title mb-3">Join Our Worship Team</h3>
+                            <p class="card-text mb-4">Do you have a heart for worship and musical talent? We'd love to have you join our team in leading the congregation in praise and worship.</p>
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <a href="/volunteers" class="btn btn-light btn-lg">
+                                    <i class="fas fa-user-plus me-2"></i>Apply to Join
+                                </a>
+                                <a href="#contact-info" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-envelope me-2"></i>Contact Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div id="contact-info" class="ministry-section mt-5">
+                    <h3 class="mb-4 text-center" style="color: var(--primary-color); font-family: 'Playfair Display', serif;">Get in Touch</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="contact-card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-tie fa-2x text-primary mb-3"></i>
+                                    <h5>Worship Pastor</h5>
+                                    <p class="mb-2"><strong>Mr. Kevin Khamadi</strong></p>
+                                    <p class="text-muted small">Worship Team Leader</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="contact-card h-100">
+                                <div class="card-body">
+                                    <h5 class="mb-3"><i class="fas fa-address-book me-2 text-primary"></i>Contact Details</h5>
+                                    <p class="mb-2">
+                                        <i class="fas fa-envelope me-2 text-muted"></i>
+                                        <a href="mailto:worship@christekklesia.org">worship@christekklesia.org</a>
+                                    </p>
+                                    <p class="mb-2">
+                                        <i class="fas fa-phone me-2 text-muted"></i>
+                                        <a href="tel:+254727923192">+254 727 923 192</a>
+                                    </p>
+                                    <p class="mb-0">
+                                        <i class="fas fa-map-marker-alt me-2 text-muted"></i>
+                                        Christ Ekklesia Fellowship Chapel, Kabarak
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
+</main>
+<!-- End Main Content -->
 
 <?php include dirname(__DIR__) . '/../includes/footer.php'; ?>

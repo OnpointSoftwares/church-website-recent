@@ -1,14 +1,42 @@
 <?php 
-$pageTitle = "About Us | Christ Ekklesia Fellowship Chapel";
+/**
+ * About Page Template - Christ Ekklesia Fellowship Chapel
+ * 
+ * Production-ready about page with SEO optimization and enhanced content.
+ */
+
+// SEO Configuration
+$pageTitle = "About Us - Christ Ekklesia Fellowship Chapel | Kabarak, Nakuru";
+$pageDescription = "Learn about Christ Ekklesia Fellowship Chapel, founded in 2019 by Pastors David and Rachael Kituyi. Discover our mission, vision, and vibrant community of 200+ members in Kabarak, Nakuru.";
+$pageKeywords = "Christ Ekklesia Fellowship Chapel about, Pastor David Kituyi, Pastor Rachael Kituyi, Kabarak church history, Nakuru church, church mission vision";
+$pageType = "article";
+$pageImage = "/assets/images/about-hero.jpg";
+
+// Page-specific scripts
+$pageScripts = [
+    '/assets/js/about-animations.js'
+];
+
 include dirname(__DIR__) . '/includes/header.php'; 
 ?>
 
-<div class="about-section container my-5">
+<!-- Main Content -->
+<main id="main-content" class="about-section container-fluid px-0">
    <!-- Hero Section -->
-   <section class="hero-section position-relative mb-5" style="background: url('../assets/images/hero-section.jpg') center/cover no-repeat; min-height: 320px; display: flex; align-items: center; justify-content: center;">
-        <div class="container text-center text-white py-5" style="background: rgba(76,29,149,0.24); border-radius: 1.5rem;">
-            <h1 class="display-4 fw-bold mb-2" style="text-shadow: 0 4px 20px rgba(0,0,0,0.25);">About Christ Ekklesia Fellowship Chapel</h1>
-            <p class="lead mb-0">A Place of Purpose, Family, and Growth in Kabarak, Nakuru</p>
+   <section class="hero-section position-relative mb-5" style="background: linear-gradient(rgba(96, 55, 158, 0.8), rgba(142, 68, 173, 0.8)), url('/assets/images/about-hero.jpg') center/cover no-repeat; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+        <div class="container text-center text-white py-5">
+            <div class="hero-content animate-fade-in">
+                <h1 class="display-4 fw-bold mb-3" style="text-shadow: 0 4px 20px rgba(0,0,0,0.3);">About Christ Ekklesia Fellowship Chapel</h1>
+                <p class="lead mb-4">A Place of Purpose, Family, and Growth in Kabarak, Nakuru</p>
+                <div class="hero-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center bg-transparent">
+                            <li class="breadcrumb-item"><a href="/" class="text-white-50">Home</a></li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">About Us</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
     </section>
     <div class="container" style="max-width: 900px; margin-bottom: 40px;">

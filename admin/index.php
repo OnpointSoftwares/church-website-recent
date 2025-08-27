@@ -1,21 +1,44 @@
 <?php
-// Modern Church Admin Dashboard with Database Integration
+/**
+ * Church Admin Dashboard - Production Ready
+ * 
+ * A secure, modern admin dashboard for church management
+ * with comprehensive security features and error handling.
+ * 
+ * @version 2.0.0
+ * @author Onpoint Softwares Solutions
+ */
+
+// Define access constant for security
+define('ADMIN_ACCESS', true);
+
+// Start session with security settings
 session_start();
 
-// Database configuration
-$host = 'localhost';
-$dbname = 'kazrxdvk_church_management';
-$username = 'kazrxdvk_vincent';
-$password = '@Admin@2025';
+// Include production configuration
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/database.php';
 
-// Create database connection
+// Initialize database connection
+$pdo = DatabaseConfig::getConnection();
+$dbManager = new DatabaseManager($pdo);
+
+// Initialize database tables
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    $dbManager->initializeTables();
+    $dbManager->runMigrations();
+    
+    // Only create default admin in development or if no admins exist
+    if (ENVIRONMENT === 'development' || $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn() == 0) {
+        $dbManager->createDefaultAdmin();
+    }
+} catch (Exception $e) {
+    Logger::log("Database initialization failed: " . $e->getMessage(), 'ERROR');
+    if (DEBUG_MODE) {
+        die("Database initialization failed: " . $e->getMessage());
+    } else {
+        die("System initialization failed. Please contact administrator.");
+    }
 }
 
 // Create tables if they don't exist
@@ -61,31 +84,132 @@ CREATE TABLE IF NOT EXISTS events (
 
 $pdo->exec($createTables);
 
-// Create default admin if none exists
-$adminCheck = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
-if ($adminCheck == 0) {
-    $defaultPassword = password_hash('admin123', PASSWORD_DEFAULT);
-    $pdo->prepare("INSERT INTO admins (username, password) VALUES (?, ?)")
-        ->execute(['admin', $defaultPassword]);
+// Handle logout
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    Logger::logSecurity("Admin logout", $_SESSION['admin_id'] ?? null);
+    session_destroy();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
 }
 
-// Authentication
+// Check session timeout
+if (isset($_SESSION['admin_logged_in']) && isset($_SESSION['last_activity'])) {
+    if (time() - $_SESSION['last_activity'] > ADMIN_SESSION_TIMEOUT) {
+        Logger::logSecurity("Session timeout", $_SESSION['admin_id'] ?? null);
+        session_destroy();
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?timeout=1');
+        exit;
+    }
+    $_SESSION['last_activity'] = time();
+}
+
+// Authentication Logic
 if (!isset($_SESSION['admin_logged_in'])) {
+    $loginError = '';
+    $isLocked = false;
+    
+    if (isset($_GET['timeout'])) {
+        $loginError = 'Your session has expired. Please log in again.';
+    }
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-        $username = $_POST['username'] ?? '';
+        $username = Security::sanitizeInput($_POST['username'] ?? '');
         $password = $_POST['password'] ?? '';
+        $csrfToken = $_POST['csrf_token'] ?? '';
         
-        $stmt = $pdo->prepare("SELECT id, password FROM admins WHERE username = ?");
-        $stmt->execute([$username]);
-        $admin = $stmt->fetch();
-        
-        if ($admin && password_verify($password, $admin['password'])) {
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_id'] = $admin['id'];
-            header('Location: ' . $_SERVER['PHP_SELF']);
-            exit;
-        } else {
-            $loginError = 'Invalid credentials';
+        // Verify CSRF token
+        if (!Security::verifyCSRFToken($csrfToken)) {
+            $loginError = 'Security token mismatch. Please try again.';
+            Logger::logSecurity("CSRF token mismatch during login attempt for user: $username");
+        }
+        // Check rate limiting
+        elseif (!Security::checkRateLimit($_SERVER['REMOTE_ADDR'], MAX_LOGIN_ATTEMPTS, LOGIN_LOCKOUT_TIME)) {
+            $isLocked = true;
+            $loginError = 'Too many failed login attempts. Please try again in 15 minutes.';
+            Logger::logSecurity("Rate limit exceeded for IP: " . $_SERVER['REMOTE_ADDR']);
+        }
+        // Validate input
+        elseif (empty($username) || empty($password)) {
+            $loginError = 'Please enter both username and password.';
+        }
+        else {
+            try {
+                $stmt = $pdo->prepare("
+                    SELECT id, password, full_name, role, is_active, failed_login_attempts, locked_until 
+                    FROM admins 
+                    WHERE username = ? AND is_active = 1
+                ");
+                $stmt->execute([$username]);
+                $admin = $stmt->fetch();
+                
+                if ($admin) {
+                    // Check if account is locked
+                    if ($admin['locked_until'] && strtotime($admin['locked_until']) > time()) {
+                        $lockTimeRemaining = ceil((strtotime($admin['locked_until']) - time()) / 60);
+                        $loginError = "Account is locked. Try again in $lockTimeRemaining minutes.";
+                        Logger::logSecurity("Login attempt on locked account: $username");
+                    }
+                    // Verify password
+                    elseif (password_verify($password, $admin['password'])) {
+                        // Successful login
+                        $_SESSION['admin_logged_in'] = true;
+                        $_SESSION['admin_id'] = $admin['id'];
+                        $_SESSION['admin_username'] = $username;
+                        $_SESSION['admin_name'] = $admin['full_name'] ?: $username;
+                        $_SESSION['admin_role'] = $admin['role'];
+                        $_SESSION['last_activity'] = time();
+                        
+                        // Clear failed attempts and update last login
+                        $updateStmt = $pdo->prepare("
+                            UPDATE admins 
+                            SET failed_login_attempts = 0, locked_until = NULL, last_login = NOW() 
+                            WHERE id = ?
+                        ");
+                        $updateStmt->execute([$admin['id']]);
+                        
+                        // Clear rate limiting
+                        Security::clearLoginAttempts($_SERVER['REMOTE_ADDR']);
+                        
+                        Logger::logSecurity("Successful login for user: $username", $admin['id']);
+                        
+                        header('Location: ' . $_SERVER['PHP_SELF']);
+                        exit;
+                    }
+                    else {
+                        // Failed password
+                        $failedAttempts = $admin['failed_login_attempts'] + 1;
+                        $lockUntil = null;
+                        
+                        // Lock account after 5 failed attempts
+                        if ($failedAttempts >= 5) {
+                            $lockUntil = date('Y-m-d H:i:s', time() + 900); // 15 minutes
+                        }
+                        
+                        $updateStmt = $pdo->prepare("
+                            UPDATE admins 
+                            SET failed_login_attempts = ?, locked_until = ? 
+                            WHERE id = ?
+                        ");
+                        $updateStmt->execute([$failedAttempts, $lockUntil, $admin['id']]);
+                        
+                        $loginError = 'Invalid credentials.';
+                        Logger::logSecurity("Failed login attempt for user: $username (attempt $failedAttempts)");
+                    }
+                }
+                else {
+                    $loginError = 'Invalid credentials.';
+                    Logger::logSecurity("Login attempt for non-existent user: $username");
+                }
+                
+                // Record failed attempt for rate limiting
+                if ($loginError && $loginError !== 'Security token mismatch. Please try again.') {
+                    Security::recordFailedAttempt($_SERVER['REMOTE_ADDR']);
+                }
+                
+            } catch (PDOException $e) {
+                Logger::log("Database error during login: " . $e->getMessage(), 'ERROR');
+                $loginError = 'System error. Please try again later.';
+            }
         }
     }
     

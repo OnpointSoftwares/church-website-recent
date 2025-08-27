@@ -166,17 +166,25 @@ report-to csp-endpoint;
 
 ## CSP Configuration Locations
 
-**IMPORTANT**: CSP is configured in multiple locations. All must be updated consistently:
+**CURRENT STATUS**: Due to server configuration issues, CSP is temporarily handled via meta tags only.
 
-1. **`.htaccess`** (Server-level, highest priority)
-2. **`/admin/config.php`** (Admin section PHP header)
-3. **`/includes/header.php`** (Meta tag fallback)
-4. **`/test-errors.html`** (Testing page)
+### Active Configuration:
+- **`/includes/header.php`** (Meta tag - ACTIVE)
+- **`/admin/config.php`** (Admin section PHP header - ACTIVE)
 
-### Priority Order
-1. **Apache .htaccess headers** (overrides everything)
-2. **PHP header() function** (overrides meta tags)
-3. **HTML meta tags** (fallback only)
+### Disabled Configuration:
+- **`.htaccess`** (Commented out due to server conflicts)
+- **`/test-errors.html`** (Testing page)
+
+### Priority Order (When All Active):
+1. **Apache .htaccess headers** (overrides everything) - DISABLED
+2. **PHP header() function** (overrides meta tags) - ACTIVE for admin
+3. **HTML meta tags** (fallback only) - ACTIVE for main site
+
+### Troubleshooting Notes:
+- Server may not be processing .htaccess CSP headers correctly
+- Meta tag approach provides more reliable cross-server compatibility
+- Admin section uses PHP headers for tighter security control
 
 ## Related Files
 - **`/.htaccess`**: Server-level CSP configuration (PRIMARY)

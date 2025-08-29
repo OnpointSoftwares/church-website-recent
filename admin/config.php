@@ -165,14 +165,5 @@ if (isset($_SERVER['HTTPS'])) {
     header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 }
 
-// Content Security Policy
-$csp = "default-src 'self'; " .
-       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com; " .
-       "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://cdnjs.cloudflare.com; " .
-       "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; " .
-       "img-src 'self' data: https: blob:; " .
-       "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://fonts.googleapis.com https://fonts.gstatic.com; " .
-       "object-src 'none'; base-uri 'self';";
-
-// Temporarily disabled - CSP handled by meta tag in main site
-// header("Content-Security-Policy: $csp");
+// Content Security Policy - COMPLETELY DISABLED
+// CSP has been removed to allow all external resources without restrictions

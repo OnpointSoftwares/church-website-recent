@@ -15,11 +15,8 @@
     # Strict referrer policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     
-    # Content Security Policy (temporarily disabled - using meta tag instead)
-    # Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://code.jquery.com https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://fonts.googleapis.com https://fonts.gstatic.com; object-src 'none'; base-uri 'self';"
-    
-    # NOTE: CSP is now handled by meta tag in /includes/header.php
-    # This allows for more flexible configuration and easier debugging
+    # Content Security Policy - DISABLED
+    # CSP has been completely removed to allow all external resources
     
     # HSTS for HTTPS (uncomment if using HTTPS)
     # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"

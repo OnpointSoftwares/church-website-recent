@@ -174,4 +174,5 @@ $csp = "default-src 'self'; " .
        "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://fonts.googleapis.com https://fonts.gstatic.com; " .
        "object-src 'none'; base-uri 'self';";
 
-header("Content-Security-Policy: $csp");
+// Temporarily disabled - CSP handled by meta tag in main site
+// header("Content-Security-Policy: $csp");

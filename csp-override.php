@@ -22,7 +22,7 @@ header('X-CSP-Disabled: true');
     <title>CSP Override Test</title>
     
     <!-- Test external resources -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -59,7 +59,7 @@ header('X-CSP-Disabled: true');
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/vendor/jquery/jquery-3.6.0.min.js"></script>
     <script>
         console.log('=== CSP Override Test ===');
         

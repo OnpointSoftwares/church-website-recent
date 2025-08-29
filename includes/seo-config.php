@@ -12,7 +12,7 @@
 $siteConfig = [
     'siteName' => 'Christ Ekklesia Fellowship Chapel',
     'siteTagline' => 'Where Christ Takes the Preeminence of Our Worship',
-    'siteUrl' => 'https://christekklesiafc.org', // Update with actual domain
+    'siteUrl' => 'https://christekklesians.org', // Update with actual domain
     'siteLogo' => '/assets/images/logo.png',
     'defaultImage' => '/assets/images/church-hero.jpg', // Add a default social sharing image
     'language' => 'en',
@@ -38,7 +38,7 @@ $siteConfig = [
 $seoPages = [
     'index' => [
         'title' => 'Christ Ekklesia Fellowship Chapel - Where Christ Takes Preeminence',
-        'description' => 'Join Christ Ekklesia Fellowship Chapel in Nairobi, Kenya. Experience authentic worship, biblical teaching, and fellowship rooted in God\'s love. Sunday services, ministries, and community outreach.',
+        'description' => 'Join Christ Ekklesia Fellowship Chapel in Nakuru, Kenya. Experience authentic worship, biblical teaching, and fellowship rooted in God\'s love. Sunday services, ministries, and community outreach.',
         'keywords' => 'Christ Ekklesia Fellowship Chapel, church Nakuru, Christian worship, biblical teaching, fellowship, Sunday service, Kenya church, Christian community, worship service',
         'type' => 'website',
         'image' => '/assets/images/church-hero.jpg'
@@ -159,7 +159,7 @@ function getOrganizationStructuredData() {
         'name' => $org['name'],
         'url' => $siteConfig['siteUrl'],
         'logo' => $siteConfig['siteUrl'] . $siteConfig['siteLogo'],
-        'description' => 'A Christian church dedicated to worship, fellowship, and community service in Nairobi, Kenya.',
+        'description' => 'A Christian church dedicated to worship, fellowship, and community service in Nakuru, Kenya.',
         'address' => [
             '@type' => 'PostalAddress',
             'streetAddress' => $org['address']['street'],
